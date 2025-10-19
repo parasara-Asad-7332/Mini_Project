@@ -1,0 +1,93 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+struct student
+{
+    int Roll_Num;
+    char name[30];
+    float avg;
+};
+
+
+int main(){
+    struct student s[50];
+    int n,i,j,marks,sum;
+    char date[15];
+    char c;
+    FILE *ptr;
+    printf("(1)-Add student\n");
+    printf("(2)-Exit\n");
+    printf("What did you want: ");
+    scanf(" %c",&c);
+
+
+    ptr = fopen("student.txt","a");
+    if(ptr == NULL){
+        printf("open Error");
+        return 1;
+    }
+
+    if(c == '1')
+{
+
+    printf("What is date today(dd/mm/yy): ");
+    scanf("%s",date);
+
+    fprintf(ptr,"Date: %s\n",date);
+
+    printf("How many student: ");
+    scanf("%d",&n);
+
+    for (i = 0; i < n; i++)
+    {
+        sum = 0;   
+        printf("\nStudent %d\n",i+1);
+        printf("Enter student Roll_Number : ");
+        scanf("%d",&s[i].Roll_Num);
+        printf("Enter student name : ");
+        scanf("%s",s[i].name);
+
+        for (j = 0; j < 5; j++)
+        {
+            printf("Enter marks of subject %d: ",j+1);
+            scanf("%d",&marks);
+            sum = sum + marks;
+        }
+        s[i].avg = sum/5.0;   
+    }
+
+    fprintf(ptr,"-----student card-----\n");
+
+    for (i = 0; i < n; i++) 
+
+    {
+        printf("\nStudent %d\n",i+1);
+        printf("Name         : %s\n",s[i].name);
+        printf("Roll Number  : %d\n",s[i].Roll_Num);
+        printf("Marks Avgrage: %.2f\n",s[i].avg);
+        
+        fprintf(ptr,"\nStudent %d\n",i+1);
+        fprintf(ptr,"Name         : %s\n",s[i].name);
+        fprintf(ptr,"Roll Number  : %d\n",s[i].Roll_Num);
+        fprintf(ptr,"Marks Avgrage: %.2f\n",s[i].avg);
+    }
+
+     printf("\nStudent data saved\n");
+
+}
+
+
+    if (c == '2')
+    {
+    return 0; 
+    } 
+
+
+    fclose(ptr);
+
+    system("pause\n");
+    return 0;
+
+
+}
