@@ -81,7 +81,7 @@ int main()
         printf("\nStudent data saved\n");
     }
 
-    if (c == '2')
+    else if (c == '2')
     {
         ptr = fopen("Student.txt", "r");
         char line[3000];
@@ -97,10 +97,14 @@ int main()
             }
         }
     }
+    else if(c == '3'){
+        return 0;
+    }
 
     fclose(ptr);
 
     system("pause\n");
     return 0;
 }
+
 
